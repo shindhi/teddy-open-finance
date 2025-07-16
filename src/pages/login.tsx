@@ -11,6 +11,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 
 const loginSchema = z.object({
   name: z.string().min(1, { message: 'Digite seu nome para continuar' }),
@@ -40,7 +41,7 @@ export function Login() {
   return (
     <div className="flex min-h-screen min-w-screen items-center justify-center px-4">
       <div className="container flex max-w-[32.5rem] flex-col items-center gap-5">
-        <h2 className="text-4xl">Olá, seja bem-vindo!</h2>
+        <h2 className="text-balance text-4xl">Olá, seja bem-vindo!</h2>
 
         <Form {...form}>
           <form
@@ -54,9 +55,9 @@ export function Login() {
                 <FormItem>
                   <FormControl>
                     <Input
-                      placeholder="Digite seu nome:"
                       {...field}
-                      className="placeholder:text-[#AAAAAA]"
+                      className="h-auto border-2 px-5 py-4 leading-none md:text-base"
+                      placeholder="Digite seu nome:"
                     />
                   </FormControl>
                   <FormMessage />
@@ -64,7 +65,13 @@ export function Login() {
               )}
             />
 
-            <Button className="w-full cursor-pointer">Entrar</Button>
+            <Button
+              className={cn(
+                'h-auto cursor-pointer py-4 font-bold leading-none md:text-2xl'
+              )}
+            >
+              Entrar
+            </Button>
           </form>
         </Form>
       </div>
