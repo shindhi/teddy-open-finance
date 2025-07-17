@@ -1,6 +1,6 @@
 import { Menu } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Logo } from '@/assets/img/Logo';
+import { Logo } from '@/assets/img/logo';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useAuth } from '@/hooks/useAuth';
 import { cn } from '@/lib/utils';

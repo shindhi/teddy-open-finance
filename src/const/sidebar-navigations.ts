@@ -1,6 +1,6 @@
-import { Home } from '@/assets/icons/Home';
-import { User } from '@/assets/icons/User';
-import { UserChecked } from '@/assets/icons/UserChecked';
+import { Home } from '@/assets/icons/home';
+import { User } from '@/assets/icons/user';
+import { UserChecked } from '@/assets/icons/user-checked';
 
 export const sidebarNavigations = {
   navMain: [

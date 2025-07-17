@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import { AuthRedirect } from './components/AuthRedirect';
-import { ProtectedRoute } from './components/ProtectedRoute';
+import { AuthRedirect } from './components/auth-redirect';
+import { ProtectedRoute } from './components/protected-route';
 import { AppLayout } from './pages/_layouts/app';
 import { LoginLayout } from './pages/_layouts/login';
 import { Dashboard } from './pages/dashboard';
