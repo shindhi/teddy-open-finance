@@ -1,12 +1,6 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Login } from './pages/login';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './routes';
 
 export function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Login />} index />
-      </Routes>
-    </BrowserRouter>
-  );
+  return <RouterProvider router={router} />;
 }
