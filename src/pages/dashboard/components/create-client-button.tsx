@@ -1,4 +1,3 @@
-import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -17,7 +16,7 @@ export function CreateClientButton() {
       <DialogTrigger asChild>
         <Button
           className={cn(
-            'cursor-pointer',
+            'mt-3 cursor-pointer',
             'border-custom-orange-500 font-bold text-custom-orange-500 text-sm',
             'hover:bg-custom-orange-500 hover:text-white',
             'transition-all duration-150'

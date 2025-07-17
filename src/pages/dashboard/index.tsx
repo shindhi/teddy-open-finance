@@ -1,6 +1,6 @@
-import { Card } from '@/components/card';
 import { cn } from '@/lib/utils';
 import { CreateClientButton } from './components/create-client-button';
+import { ItemCard } from './components/item-card';
 
 export function Dashboard() {
   return (
@@ -21,10 +21,7 @@ export function Dashboard() {
 
       <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4">
         {Array.from({ length: 16 }).map((_, index) => (
-          <Card.Root key={index}>
-            <Card.Content />
-            <Card.Footer />
-          </Card.Root>
+          <ItemCard key={index} />
         ))}
       </div>
 
