@@ -57,7 +57,7 @@ export function Header() {
                 'hover:bg-transparent hover:text-custom-orange-500 hover:underline',
                 'transition-all duration-100'
               )}
-              to="/clientes-selecionados"
+              to="/selected-customers"
             >
               Clientes selecionados
             </Link>

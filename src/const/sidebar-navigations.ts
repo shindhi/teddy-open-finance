@@ -12,12 +12,12 @@ export const sidebarNavigations = {
     {
       title: 'Clientes',
       icon: User,
-      url: '/clientes',
+      url: '/dashboard',
     },
     {
       title: 'Clientes Selecionados',
       icon: UserChecked,
-      url: '/clientes-selecionados',
+      url: '/selected-customers',
     },
   ],
 };
