@@ -1,5 +1,5 @@
 import { Menu } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Logo } from '@/assets/img/logo';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useAuth } from '@/hooks/useAuth';
@@ -9,6 +9,7 @@ import { useSidebar } from './ui/sidebar';
 
 export function Header() {
   const isMobile = useIsMobile();
+  const location = useLocation();
   const { toggleSidebar } = useSidebar();
   const { user, logout } = useAuth();
 
@@ -40,13 +41,15 @@ export function Header() {
           )}
         >
           <Logo />
-          <div className=" flex items-center gap-8 ">
+          <div className="flex items-center gap-8 ">
             <Link
               className={cn(
                 'cursor-pointer p-0',
+                'data-[active=true]:text-custom-orange-500 data-[active=true]:underline',
                 'hover:bg-transparent hover:text-custom-orange-500 hover:underline',
                 'transition-all duration-100'
               )}
+              data-active={location.pathname === '/dashboard'}
               to="/dashboard"
             >
               Clientes
@@ -54,9 +57,11 @@ export function Header() {
             <Link
               className={cn(
                 'cursor-pointer p-0',
+                'data-[active=true]:text-custom-orange-500 data-[active=true]:underline',
                 'hover:bg-transparent hover:text-custom-orange-500 hover:underline',
                 'transition-all duration-100'
               )}
+              data-active={location.pathname === '/selected-customers'}
               to="/selected-customers"
             >
               Clientes selecionados
