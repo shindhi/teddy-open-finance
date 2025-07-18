@@ -1,10 +1,8 @@
-import { api } from '@/lib/http';
+import { api } from '@/lib/api';
 import type { DeleteUserRequest } from '../types/delete-user-request';
 
-export const deleteUser = async ({
-  userId,
-}: DeleteUserRequest): Promise<string> => {
-  const response = await api.delete<string>(`/users/${userId}`).json();
+export const deleteUser = async ({ userId }: DeleteUserRequest) => {
+  const result = await api.delete(`users/${userId}`).json<string>();
 
-  return response;
+  return result;
 };

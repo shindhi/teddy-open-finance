@@ -1,16 +1,13 @@
-import { api } from '@/lib/http';
+import { api } from '@/lib/api';
 import type { GetUsersRequest } from '../types/get-users-request';
 import type { GetUsersResponse } from '../types/get-users-response';
 
-export const getUsers = async ({
-  page,
-  limit,
-}: GetUsersRequest): Promise<GetUsersResponse> => {
-  const response = await api
-    .get<GetUsersResponse>('/users', {
+export const getUsers = async ({ page, limit }: GetUsersRequest) => {
+  const result = await api
+    .get('users', {
       searchParams: { page, limit },
     })
-    .json();
+    .json<GetUsersResponse>();
 
-  return response;
+  return result;
 };

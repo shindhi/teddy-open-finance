@@ -27,7 +27,7 @@ export function useAuth() {
 
     setUser(null);
     setIsAuthenticated(false);
-    navigate('/login');
+    navigate('/');
   };
 
   return {

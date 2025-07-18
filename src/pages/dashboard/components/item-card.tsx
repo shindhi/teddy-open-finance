@@ -1,10 +1,16 @@
 import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import type { User } from '@/http/types/user';
+import { formatCurrency } from '@/utils/format-currency';
 import { DeleteClient } from './delete-client';
 import { EditClient } from './edit-client';
 
-export function ItemCard() {
+interface ItemCardProps {
+  user: User;
+}
+
+export function ItemCard({ user }: ItemCardProps) {
   function handleSelectClient() {
     // adicionar no sessionStorage
   }
@@ -12,9 +18,11 @@ export function ItemCard() {
   return (
     <Card className="gap-4">
       <CardContent className="flex flex-col items-center justify-center gap-2.5">
-        <div className="font-bold">Eduardo</div>
-        <div className="text-sm">Salário: R$ 3.500,00</div>
-        <div className="text-sm">Empresa: R$ 120.500,00</div>
+        <div className="font-bold">{user.name}</div>
+        <div className="text-sm">Salário: {formatCurrency(user.salary)}</div>
+        <div className="text-sm">
+          Empresa: {formatCurrency(user.companyValuation)}
+        </div>
       </CardContent>
       <CardFooter className="flex items-center justify-between">
         <Button

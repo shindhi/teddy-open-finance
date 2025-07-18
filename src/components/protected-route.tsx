@@ -13,7 +13,7 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
   }
 
   if (!isAuthenticated) {
-    return <Navigate replace to="/login" />;
+    return <Navigate replace to="/" />;
   }
 
   return <>{children}</>;

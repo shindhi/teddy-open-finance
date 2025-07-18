@@ -1,16 +1,16 @@
-import { api } from '@/lib/http';
+import { api } from '@/lib/api';
 import type { UpdateUserRequest } from '../types/update-user-request';
 import type { UpdateUserResponse } from '../types/update-user-response';
 
 export const updateUser = async (
   userId: number,
   request: UpdateUserRequest
-): Promise<UpdateUserResponse> => {
-  const response = await api
-    .put<UpdateUserResponse>(`/users/${userId}`, {
+) => {
+  const result = await api
+    .put(`users/${userId}`, {
       json: request,
     })
-    .json();
+    .json<UpdateUserResponse>();
 
-  return response;
+  return result;
 };
