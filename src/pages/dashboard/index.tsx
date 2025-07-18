@@ -22,8 +22,13 @@ export function Dashboard() {
         'px-6 py-10 sm:px-6 md:px-[1.75rem] lg:px-[7.5rem]'
       )}
     >
-      <div className="flex items-center justify-between text-[1.125rem]">
-        <div className="flex items-center gap-2">
+      <div
+        className={cn(
+          'flex flex-col-reverse items-end justify-between gap-8 text-[1.125rem]',
+          'md:flex-row md:items-center md:justify-between'
+        )}
+      >
+        <div className={cn('mx-auto flex items-center gap-2', 'md:mx-0')}>
           <strong>{users?.clients.length}</strong>
           clientes encontrados:
         </div>
