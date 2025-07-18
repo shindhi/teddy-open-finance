@@ -1,4 +1,5 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Pagination } from '@/components/pagination';
 import { useUsers } from '@/http/hooks/use-users';
 import { cn } from '@/lib/utils';
@@ -8,10 +9,14 @@ import { ItemCard } from './components/item-card';
 import { PageInformation } from './components/page-information';
 
 export function Dashboard() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [limit, setLimit] = useState(16);
+  const [searchParms] = useSearchParams();
 
-  const { data: users } = useUsers({ page: currentPage, limit });
+  const page = searchParms.get('page') ? Number(searchParms.get('page')) : 1;
+  const limit = searchParms.get('limit')
+    ? Number(searchParms.get('limit'))
+    : 16;
+
+  const { data: users } = useUsers({ page, limit });
   const { selectedUsers } = useSelectedUsersStore();
 
   const filteredUsers = useMemo(() => {
@@ -23,10 +28,6 @@ export function Dashboard() {
     return users.clients.filter((user) => !selectedUserIds.has(user.id));
   }, [users?.clients, selectedUsers]);
 
-  const handlePageChange = useCallback((page: number) => {
-    setCurrentPage(page);
-  }, []);
-
   return (
     <div
       className={cn(
@@ -37,7 +38,6 @@ export function Dashboard() {
       <PageInformation
         limit={limit}
         selectedUsers={selectedUsers.length}
-        setLimit={setLimit}
         totalUsers={filteredUsers.length}
       />
 
@@ -64,11 +64,7 @@ export function Dashboard() {
 
       <CreateClientButton />
 
-      <Pagination
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-        totalPages={users?.totalPages ?? 0}
-      />
+      <Pagination currentPage={page} totalPages={users?.totalPages ?? 0} />
     </div>
   );
 }

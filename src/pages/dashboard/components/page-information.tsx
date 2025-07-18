@@ -1,18 +1,27 @@
+import { useSearchParams } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
 interface PageInformationProps {
   totalUsers: number;
   selectedUsers: number;
   limit: number;
-  setLimit: (limit: number) => void;
 }
 
 export function PageInformation({
   totalUsers,
   selectedUsers,
   limit,
-  setLimit,
 }: PageInformationProps) {
+  const [, setSearchParams] = useSearchParams();
+
+  function handleLimitChange(value: string) {
+    setSearchParams((params) => {
+      params.set('limit', value);
+
+      return params;
+    });
+  }
+
   return (
     <div
       className={cn(
@@ -35,7 +44,7 @@ export function PageInformation({
         Clientes por página:
         <select
           className="rounded-md border px-2 py-1.5 text-xs"
-          onChange={(e) => setLimit(Number(e.target.value))}
+          onChange={(e) => handleLimitChange(e.target.value)}
           value={limit}
         >
           <option value="4">4</option>
