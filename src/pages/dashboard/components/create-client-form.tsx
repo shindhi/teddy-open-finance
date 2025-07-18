@@ -11,11 +11,12 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useCreateUser } from '@/http/hooks/use-create-user';
 
 const createClientFormSchema = z.object({
   name: z.string().min(1, { message: 'Nome é obrigatório' }),
   salary: z.string().min(1, { message: 'Salário é obrigatório' }),
-  companyValue: z
+  companyValuation: z
     .string()
     .min(1, { message: 'Valor da empresa é obrigatório' }),
 });
@@ -34,8 +35,10 @@ const createClientSchema = createClientFormSchema.transform((data) => ({
 
     return parsed;
   })(),
-  companyValue: (() => {
-    const cleaned = data.companyValue.replace(/[^\d,]/g, '').replace(',', '.');
+  companyValuation: (() => {
+    const cleaned = data.companyValuation
+      .replace(/[^\d,]/g, '')
+      .replace(',', '.');
     const parsed = Number.parseFloat(cleaned);
 
     if (Number.isNaN(parsed) || parsed <= 0) {
@@ -46,20 +49,28 @@ const createClientSchema = createClientFormSchema.transform((data) => ({
   })(),
 }));
 
-export function CreateClientForm() {
+interface CreateClientFormProps {
+  onClose: () => void;
+}
+
+export function CreateClientForm({ onClose }: CreateClientFormProps) {
+  const { mutate: createClient } = useCreateUser();
+
   const form = useForm<CreateClientFormData>({
     resolver: zodResolver(createClientFormSchema),
     defaultValues: {
       name: '',
       salary: '',
-      companyValue: '',
+      companyValuation: '',
     },
   });
 
   function handleCreateClient(data: CreateClientFormData) {
     const validatedData = createClientSchema.parse(data);
-    console.log(data);
-    console.log(validatedData);
+
+    createClient(validatedData);
+    form.reset();
+    onClose();
   }
 
   return (
@@ -107,7 +118,7 @@ export function CreateClientForm() {
 
         <FormField
           control={form.control}
-          name="companyValue"
+          name="companyValuation"
           render={({ field }) => (
             <FormItem>
               <FormControl>

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -11,8 +12,10 @@ import { cn } from '@/lib/utils';
 import { CreateClientForm } from './create-client-form';
 
 export function CreateClientButton() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Dialog>
+    <Dialog onOpenChange={setIsOpen} open={isOpen}>
       <DialogTrigger asChild>
         <Button
           className={cn(
@@ -21,6 +24,7 @@ export function CreateClientButton() {
             'hover:bg-custom-orange-500 hover:text-white',
             'transition-all duration-150'
           )}
+          onClick={() => setIsOpen(true)}
           variant="outline"
         >
           Criar cliente
@@ -33,7 +37,7 @@ export function CreateClientButton() {
           <DialogClose />
         </DialogHeader>
 
-        <CreateClientForm />
+        <CreateClientForm onClose={() => setIsOpen(false)} />
       </DialogContent>
     </Dialog>
   );

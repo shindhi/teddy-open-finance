@@ -52,9 +52,10 @@ const createClientSchema = createClientFormSchema.transform((data) => ({
 
 interface EditClientFormProps {
   user: User;
+  onClose: () => void;
 }
 
-export function EditClientForm({ user }: EditClientFormProps) {
+export function EditClientForm({ user, onClose }: EditClientFormProps) {
   const { mutate: updateClient } = useUpdateUser();
 
   const form = useForm<CreateClientFormData>({
@@ -73,6 +74,9 @@ export function EditClientForm({ user }: EditClientFormProps) {
       userId: user.id,
       data: validatedData,
     });
+
+    form.reset();
+    onClose();
   }
 
   return (

@@ -1,4 +1,5 @@
 import { Pencil } from 'lucide-react';
+import { useState } from 'react';
 import {
   Dialog,
   DialogClose,
@@ -15,8 +16,10 @@ interface EditClientProps {
 }
 
 export function EditClient({ user }: EditClientProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Dialog>
+    <Dialog onOpenChange={setIsOpen} open={isOpen}>
       <DialogTrigger className="cursor-pointer">
         <Pencil className="size-3.5" strokeWidth={3} />
       </DialogTrigger>
@@ -26,7 +29,7 @@ export function EditClient({ user }: EditClientProps) {
           <DialogClose />
         </DialogHeader>
 
-        <EditClientForm user={user} />
+        <EditClientForm onClose={() => setIsOpen(false)} user={user} />
       </DialogContent>
     </Dialog>
   );
