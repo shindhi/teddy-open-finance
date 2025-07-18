@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { useSelectedUsersStore } from '@/stores/selected-users-store';
 import { CreateClientButton } from './components/create-client-button';
 import { ItemCard } from './components/item-card';
+import { PageInformation } from './components/page-information';
 
 export function Dashboard() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,36 +34,12 @@ export function Dashboard() {
         'px-6 py-10 sm:px-6 md:px-[1.75rem] lg:px-[7.5rem]'
       )}
     >
-      <div
-        className={cn(
-          'flex flex-col-reverse items-end justify-between gap-8 text-[1.125rem]',
-          'md:flex-row md:items-center md:justify-between'
-        )}
-      >
-        <div className={cn('mx-auto flex items-center gap-2', 'md:mx-0')}>
-          <strong>{filteredUsers.length}</strong>
-          clientes encontrados:
-          {selectedUsers.length > 0 && (
-            <span className="text-gray-500 text-sm">
-              ({selectedUsers.length} selecionado
-              {selectedUsers.length !== 1 ? 's' : ''})
-            </span>
-          )}
-        </div>
-
-        <div className="flex items-center gap-2 text-[1.125rem]">
-          Clientes por página:
-          <select
-            className="rounded-md border px-2 py-1.5 text-xs"
-            onChange={(e) => setLimit(Number(e.target.value))}
-            value={limit}
-          >
-            <option value="4">4</option>
-            <option value="8">8</option>
-            <option value="16">16</option>
-          </select>
-        </div>
-      </div>
+      <PageInformation
+        limit={limit}
+        selectedUsers={selectedUsers.length}
+        setLimit={setLimit}
+        totalUsers={filteredUsers.length}
+      />
 
       <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4">
         {filteredUsers.map((user) => (

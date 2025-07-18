@@ -1,4 +1,4 @@
-import { Check, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import type { User } from '@/http/types/user';
@@ -38,11 +38,7 @@ export function ItemCard({ user }: ItemCardProps) {
           title={isSelected ? 'Cliente já selecionado' : 'Selecionar cliente'}
           variant="ghost"
         >
-          {isSelected ? (
-            <Check className="size-4 text-green-600" strokeWidth={3} />
-          ) : (
-            <Plus className="size-4" strokeWidth={3} />
-          )}
+          <Plus className="size-4" strokeWidth={3} />
         </Button>
 
         <EditClient user={user} />
