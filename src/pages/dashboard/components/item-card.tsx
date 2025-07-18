@@ -5,7 +5,9 @@ import { DeleteClient } from './delete-client';
 import { EditClient } from './edit-client';
 
 export function ItemCard() {
-  function handleSelectClient() {}
+  function handleSelectClient() {
+    // adicionar no sessionStorage
+  }
 
   return (
     <Card className="gap-4">
