@@ -10,9 +10,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { useDeleteUser } from '@/http/hooks/use-delete-user';
 
-export function DeleteClient() {
-  function handleDeleteClient() {}
+interface DeleteClientProps {
+  userId: number;
+}
+export function DeleteClient({ userId }: DeleteClientProps) {
+  const { mutate: deleteClient } = useDeleteUser();
+
+  function handleDeleteClient() {
+    deleteClient(userId);
+  }
 
   return (
     <Dialog>
@@ -29,7 +37,10 @@ export function DeleteClient() {
         </DialogHeader>
 
         <DialogFooter>
-          <Button className="w-full cursor-pointer py-3 font-bold text-sm">
+          <Button
+            className="w-full cursor-pointer py-3 font-bold text-sm"
+            onClick={handleDeleteClient}
+          >
             Excluir cliente
           </Button>
         </DialogFooter>

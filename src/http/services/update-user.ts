@@ -7,7 +7,7 @@ export const updateUser = async (
   request: UpdateUserRequest
 ) => {
   const result = await api
-    .put(`users/${userId}`, {
+    .patch(`users/${userId}`, {
       json: request,
     })
     .json<UpdateUserResponse>();

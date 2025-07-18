@@ -11,11 +11,13 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useUpdateUser } from '@/http/hooks/use-update-user';
+import type { User } from '@/http/types/user';
 
 const createClientFormSchema = z.object({
   name: z.string().min(1, { message: 'Nome é obrigatório' }),
   salary: z.string().min(1, { message: 'Salário é obrigatório' }),
-  companyValue: z
+  companyValuation: z
     .string()
     .min(1, { message: 'Valor da empresa é obrigatório' }),
 });
@@ -34,8 +36,10 @@ const createClientSchema = createClientFormSchema.transform((data) => ({
 
     return parsed;
   })(),
-  companyValue: (() => {
-    const cleaned = data.companyValue.replace(/[^\d,]/g, '').replace(',', '.');
+  companyValuation: (() => {
+    const cleaned = data.companyValuation
+      .replace(/[^\d,]/g, '')
+      .replace(',', '.');
     const parsed = Number.parseFloat(cleaned);
 
     if (Number.isNaN(parsed) || parsed <= 0) {
@@ -46,27 +50,36 @@ const createClientSchema = createClientFormSchema.transform((data) => ({
   })(),
 }));
 
-export function EditClientForm() {
+interface EditClientFormProps {
+  user: User;
+}
+
+export function EditClientForm({ user }: EditClientFormProps) {
+  const { mutate: updateClient } = useUpdateUser();
+
   const form = useForm<CreateClientFormData>({
     resolver: zodResolver(createClientFormSchema),
     defaultValues: {
-      name: '',
-      salary: '',
-      companyValue: '',
+      name: user.name,
+      salary: user.salary.toString(),
+      companyValuation: user.companyValuation.toString(),
     },
   });
 
-  function handleCreateClient(data: CreateClientFormData) {
+  function handleUpdateClient(data: CreateClientFormData) {
     const validatedData = createClientSchema.parse(data);
-    console.log(data);
-    console.log(validatedData);
+
+    updateClient({
+      userId: user.id,
+      data: validatedData,
+    });
   }
 
   return (
     <Form {...form}>
       <form
         className="flex flex-col gap-4"
-        onSubmit={form.handleSubmit(handleCreateClient)}
+        onSubmit={form.handleSubmit(handleUpdateClient)}
       >
         <FormField
           control={form.control}
@@ -107,7 +120,7 @@ export function EditClientForm() {
 
         <FormField
           control={form.control}
-          name="companyValue"
+          name="companyValuation"
           render={({ field }) => (
             <FormItem>
               <FormControl>

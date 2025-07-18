@@ -14,7 +14,7 @@ export function InputMask({ className, ...props }: NumericFormatProps) {
       decimalScale={2}
       decimalSeparator=","
       fixedDecimalScale
-      prefix="R$"
+      prefix="R$ "
       thousandSeparator="."
     />
   );

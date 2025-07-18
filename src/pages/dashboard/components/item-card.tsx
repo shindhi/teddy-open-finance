@@ -32,9 +32,9 @@ export function ItemCard({ user }: ItemCardProps) {
           <Plus className="size-4" strokeWidth={3} />
         </Button>
 
-        <EditClient />
+        <EditClient user={user} />
 
-        <DeleteClient />
+        <DeleteClient userId={user.id} />
       </CardFooter>
     </Card>
   );

@@ -7,9 +7,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import type { User } from '@/http/types/user';
 import { EditClientForm } from './edit-client-form';
 
-export function EditClient() {
+interface EditClientProps {
+  user: User;
+}
+
+export function EditClient({ user }: EditClientProps) {
   return (
     <Dialog>
       <DialogTrigger className="cursor-pointer">
@@ -21,7 +26,7 @@ export function EditClient() {
           <DialogClose />
         </DialogHeader>
 
-        <EditClientForm />
+        <EditClientForm user={user} />
       </DialogContent>
     </Dialog>
   );
