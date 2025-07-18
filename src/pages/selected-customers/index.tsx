@@ -1,9 +1,6 @@
-import { Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { useSelectedUsersStore } from '@/stores/selected-users-store';
-import { formatCurrency } from '@/utils/format-currency';
 import { ItemCard } from './components/item-card';
 
 export function SelectedCustomers() {

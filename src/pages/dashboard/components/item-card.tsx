@@ -22,7 +22,7 @@ export function ItemCard({ user }: ItemCardProps) {
   }
 
   return (
-    <Card className="gap-4">
+    <Card className="flex flex-col justify-between gap-4">
       <CardContent className="flex flex-col items-center justify-center gap-2.5">
         <div className="font-bold">{user.name}</div>
         <div className="text-sm">Salário: {formatCurrency(user.salary)}</div>
